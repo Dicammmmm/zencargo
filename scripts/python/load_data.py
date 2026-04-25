@@ -54,7 +54,17 @@ def _prep_shipments(df: pd.DataFrame) -> pd.DataFrame:
             "invoice_uploaded_at",
         ]
     ]
-
+    timestamp_cols = [
+        "requested_timestamp",
+        "collected_latest_estimate_start_datetime_local",
+        "collected_occurred_at_local",
+        "delivered_latest_estimate_timestamp",
+        "delivered_occurred_at",
+        "invoice_uploaded_at",
+    ]
+    for col in timestamp_cols:
+        shipments[col] = shipments[col].astype(str).str.replace(" UTC", "", regex=False)
+    
     return shipments
 
 
