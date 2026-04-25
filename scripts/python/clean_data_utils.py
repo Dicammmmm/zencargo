@@ -1,9 +1,6 @@
 import pandas as pd
-from pathlib import Path
 from datetime import date
 
-DATA_ROOT = "./data/"
-DATA = pd.read_csv(Path(DATA_ROOT) / "data.csv", index_col=0)
 MAX_DATE = date.today()
 
 
