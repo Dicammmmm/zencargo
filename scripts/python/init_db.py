@@ -1,14 +1,14 @@
 import sqlite3
 from pathlib import Path
 
-DATA_ROOT = "./data/"
-SCRIPTS_ROOT = "./scripts/"
+DATA_ROOT = Path("../../data/")
+SCRIPTS_ROOT = Path("../../scripts/")
 
 
 def main():
-    con = sqlite3.connect(Path(DATA_ROOT) / "database.db")
+    con = sqlite3.connect(DATA_ROOT / "database.db")
 
-    with open(Path(SCRIPTS_ROOT) / "data_model.sql", "r") as f:
+    with open(SCRIPTS_ROOT / "sql" / "data_model.sql", "r") as f:
         con.executescript(f.read())
 
     con.close()

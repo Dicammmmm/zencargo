@@ -2,8 +2,8 @@ import pandas as pd
 from pathlib import Path
 from clean_data_utils import DataQuality
 
-DATA_ROOT = "./data/"
-DATA = pd.read_csv(Path(DATA_ROOT) / "data.csv", index_col=0)
+DATA_ROOT = Path("../../data/")
+DATA = pd.read_csv(DATA_ROOT / "data.csv", index_col=0)
 
 
 def main():
@@ -16,8 +16,8 @@ def main():
         ._quarantine_unknowns()
     )
 
-    dq.clean.to_csv(Path(DATA_ROOT) / "data_clean.csv", index=False)
-    dq.quarantine.to_csv(Path(DATA_ROOT) / "data_quarantine.csv", index=False)
+    dq.clean.to_csv(DATA_ROOT / "data_clean.csv", index=False)
+    dq.quarantine.to_csv(DATA_ROOT / "data_quarantine.csv", index=False)
 
 
 if __name__ == "__main__":

@@ -2,10 +2,10 @@ import sqlite3
 import pandas as pd
 from pathlib import Path
 
-DATA_ROOT = "./data/"
+DATA_ROOT = Path("../../data/")
 
-conn = sqlite3.connect(Path(DATA_ROOT) / "database.db")
-data = pd.read_csv(Path(DATA_ROOT) / "data_clean.csv", index_col=0)
+conn = sqlite3.connect(DATA_ROOT / "database.db")
+data = pd.read_csv(DATA_ROOT / "data_clean.csv", index_col=0)
 
 
 def _prep_locations(df: pd.DataFrame) -> pd.DataFrame:
