@@ -64,7 +64,7 @@ def _prep_shipments(df: pd.DataFrame) -> pd.DataFrame:
     ]
     for col in timestamp_cols:
         shipments[col] = shipments[col].astype(str).str.replace(" UTC", "", regex=False)
-    
+
     return shipments
 
 
