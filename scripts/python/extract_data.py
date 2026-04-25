@@ -2,7 +2,7 @@ from pathlib import Path
 import pandas as pd
 
 
-DATA_ROOT = Path("../../data")
+DATA_ROOT = Path("./data")
 
 
 def _read_excel(excel_file: str) -> pd.DataFrame:

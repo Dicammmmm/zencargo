@@ -1,8 +1,8 @@
 import sqlite3
 from pathlib import Path
 
-DATA_ROOT = Path("../../data/")
-SCRIPTS_ROOT = Path("../../scripts/")
+DATA_ROOT = Path("./data/")
+SCRIPTS_ROOT = Path("./scripts/")
 
 
 def main():

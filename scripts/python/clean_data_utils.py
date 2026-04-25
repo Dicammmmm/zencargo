@@ -1,7 +1,7 @@
 import pandas as pd
-from datetime import date
+from datetime import datetime
 
-MAX_DATE = date.today()
+MAX_DATE = datetime.now()
 
 
 class DataQuality:
@@ -39,25 +39,24 @@ class DataQuality:
         return self._quarantine(mask)
 
     def _quarantine_invalid_dates(self):
-        future_dates_mask = (
-            self.clean[
-                [
-                    "requested_timestamp",
-                    "collected_latest_estimate_start_datetime_local",
-                    "collected_occurred_at_local",
-                    "delivered_latest_estimate_timestamp",
-                    "delivered_occurred_at",
-                    "invoice_uploaded_at",
-                    "revenue_date",
-                ]
-            ]
-            .gt(MAX_DATE)
-            .any(axis=1)
-        )
+        date_cols = [
+            "requested_timestamp",
+            "collected_latest_estimate_start_datetime_local",
+            "collected_occurred_at_local",
+            "delivered_latest_estimate_timestamp",
+            "delivered_occurred_at",
+            "invoice_uploaded_at",
+            "revenue_date",
+        ]
+
+        future_dates_mask = pd.Series(False, index=self.clean.index)
+        for col in date_cols:
+            parsed = pd.to_datetime(self.clean[col], errors="coerce", utc=True)
+            future_dates_mask |= parsed.gt(pd.Timestamp(MAX_DATE, tz="UTC"))
 
         revenue_mask = (
-            pd.to_datetime(self.clean["revenue_date"]).dt.date
-            < pd.to_datetime(self.clean["requested_timestamp"]).dt.date
+            pd.to_datetime(self.clean["revenue_date"], errors="coerce").dt.date
+            < pd.to_datetime(self.clean["requested_timestamp"], errors="coerce").dt.date
         )
         mask = future_dates_mask | revenue_mask
         return self._quarantine(mask)

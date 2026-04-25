@@ -2,7 +2,7 @@ import pandas as pd
 from pathlib import Path
 from clean_data_utils import DataQuality
 
-DATA_ROOT = Path("../../data/")
+DATA_ROOT = Path("./data/")
 DATA = pd.read_csv(DATA_ROOT / "data.csv", index_col=0)
 
 

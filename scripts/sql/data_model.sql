@@ -1,11 +1,11 @@
-CREATE TABLE locations (
+CREATE TABLE  IF NOT EXISTS locations (
   location_id TEXT PRIMARY KEY,
   street TEXT,
   city TEXT,
   country_code TEXT
 );
 
-CREATE TABLE shipments (
+CREATE TABLE IF NOT EXISTS shipments (
   cargo_id TEXT PRIMARY KEY,
   mode_of_transport TEXT,
   stage TEXT,
@@ -21,5 +21,5 @@ CREATE TABLE shipments (
   invoice_uploaded_at TIMESTAMP
 );
 
-CREATE INDEX idx_shipments_collection_location_id ON shipments(collection_location_id);
-CREATE INDEX idx_shipments_delivered_location_id ON shipments(delivered_location_id);
+CREATE INDEX IF NOT EXISTS idx_shipments_collection_location_id ON shipments(collection_location_id);
+CREATE INDEX IF NOT EXISTS idx_shipments_delivered_location_id ON shipments(delivered_location_id);
