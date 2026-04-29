@@ -4,4 +4,4 @@ SELECT
   COUNT(*) as active
 FROM shipments
 WHERE
-  stage NOT LIKE "%delivered%";
+  stage != 'l) delivered';

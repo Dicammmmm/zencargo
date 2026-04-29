@@ -4,6 +4,7 @@ SELECT
   s.mode_of_transport,
   cl.country_code AS origin_country,
   dl.country_code AS destination_country,
+  COUNT(*) AS n_shipments,
   AVG(
     JULIANDAY(s.delivered_occurred_at) - JULIANDAY(s.collected_occurred_at_local)
   ) AS avg_lead_time_days
