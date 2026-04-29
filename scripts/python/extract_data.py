@@ -15,7 +15,7 @@ def _read_excel(excel_file: str) -> pd.DataFrame:
 
 
 def _export_csv(excel_df: pd.DataFrame) -> None:
-    excel_df.to_csv(DATA_ROOT / "data.csv")
+    excel_df.to_csv(DATA_ROOT / "data.csv", index=False)
 
 
 def main():

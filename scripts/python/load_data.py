@@ -69,8 +69,10 @@ def _prep_shipments(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def _insert_data(locations: pd.DataFrame, shipments: pd.DataFrame) -> None:
-    locations.to_sql("locations", conn, if_exists="replace", index=False)
-    shipments.to_sql("shipments", conn, if_exists="replace", index=False)
+    conn.execute("DELETE FROM shipments;")
+    conn.execute("DELETE FROM locations")
+    locations.to_sql("locations", conn, if_exists="append", index=False)
+    shipments.to_sql("shipments", conn, if_exists="append", index=False)
 
 
 def main():

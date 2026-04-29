@@ -19,8 +19,9 @@ class DataQuality:
         return self._quarantine(mask)
 
     def _quarantine_duplicate_cargo_id(self):
-        mask = self.clean["cargo_id"].duplicated(keep=False)
-        return self._quarantine(mask)
+        null_mask = self.clean["cargo_id"].isna()
+        duplicate_mask = self.clean["cargo_id"].duplicated(keep=False) & ~null_mask
+        return self._quarantine(null_mask | duplicate_mask)
 
     def _remove_missing_values(self):
         mask = (
@@ -41,9 +42,7 @@ class DataQuality:
     def _quarantine_invalid_dates(self):
         date_cols = [
             "requested_timestamp",
-            "collected_latest_estimate_start_datetime_local",
             "collected_occurred_at_local",
-            "delivered_latest_estimate_timestamp",
             "delivered_occurred_at",
             "invoice_uploaded_at",
             "revenue_date",
